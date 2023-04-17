@@ -189,8 +189,17 @@ h1>.magic-text {
 }
 
 
+a {
+    font-family: "Rubik", sans-serif;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
 
+}
 
+a:hover {
+    color: pink;
+    transition-duration: 0.3s;
+  }
 
 /* to top button */
 
