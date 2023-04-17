@@ -1,11 +1,226 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
+/* For Webkit-based browsers (Chrome, Safari, Edge, etc.) */
+::-webkit-scrollbar {
+    width: 10px;
 }
 
-h1 {
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+/* For Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.1);
+    scroll-behavior: smooth;
+
+}
+
+
+:root {
+    --purple: rgb(123, 31, 162);
+    --violet: rgb(103, 58, 183);
+    --pink: rgb(244, 143, 177);
+}
+
+@keyframes background-pan {
+    from {
+        background-position: 0% center;
+    }
+
+    to {
+        background-position: -200% center;
+    }
+}
+
+@keyframes scale {
+
+    from,
+    to {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+body {
+    background-color: rgb(10, 10, 10);
+    display: grid;
+    height: 100vh;
+    margin: 0px;
+    overflow: auto;
+    place-items: center;
+    color: white;
+}
+
+#home {
+    height: 100vh;
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px;
+    /* Add some padding to the left and right */
     text-align: center;
-    color: #333;
+}
+
+section h2 {
+    font-family: "Rubik", sans-serif;
+
+    font-size: 2.5em;
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 0;
+    transition: transform 1s ease;
+
+}
+
+section h2.visible {
+    transform: translateY(-10px);
+}
+
+section p {
+    font-family: "Rubik", sans-serif;
+
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 800px;
+}
+
+
+h1 {
+    color: white;
+    font-family: "Rubik", sans-serif;
+    font-size: clamp(2em, 2vw, 4em);
+    font-weight: 400;
+    margin: 0px;
+    padding: 20px;
+    text-align: center;
+}
+
+
+h1>.magic-text {
+    display: inline-block;
+    position: relative;
+    animation: background-pan 3s linear infinite;
+    background: linear-gradient(to right,
+            var(--purple),
+            var(--violet),
+            var(--pink),
+            var(--purple));
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+}
+
+/* menu-panel */
+.menu-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Change this from center to flex-end */
+    padding-right: 30px; /* Add some padding to the right */
+    background-color: rgba(255, 255, 255, 0.01);
+    /* Adjust the alpha value to change transparency */
+
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    transform: translateY(-100%);
+    transition: transform 0.5s ease-in-out;
+    z-index: 100;
+
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 100% 0.5px;
+}
+
+.menu-panel.visible {
+    transform: translateY(0%);
+}
+
+.menu-panel ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.menu-panel li {
+    margin: 0 10px;
+}
+
+.menu-panel a {
+    font-family: "Rubik", sans-serif;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1 em;
+    font-weight: light;
+}
+
+
+
+
+
+/* to top button */
+
+#to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.arrow-up {
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(-135deg);
 }
